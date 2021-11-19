@@ -19,7 +19,7 @@ exports.createPost = async (req, res) => {
   }
   try {
     const post = new Post({
-      postedBy: req.user.id,
+      postedBy: req.user.username,
       ...req.body,
     });
 

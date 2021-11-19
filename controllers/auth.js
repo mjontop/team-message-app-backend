@@ -97,7 +97,7 @@ exports.getUserDetails = async (req, res) => {
   const { user, error } = await checkUsernameExist(req.params.username);
   if (!!error) {
     const channels = await Channel.find({
-      $or: [{ members: user._id }, { createdBy: user._id }],
+      $or: [{ members: user.username }, { createdBy: user.username }],
     });
     return res.json({
       id: user._id,

@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var postSchema = new mongoose.Schema(
   {
     postedBy: {
-      type: mongoose.Types.ObjectId,
+      type: String,
       required: true,
     },
     message: {

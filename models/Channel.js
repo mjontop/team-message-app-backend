@@ -12,7 +12,7 @@ var channelSchema = new mongoose.Schema(
       required: true,
     },
     createdBy: {
-      type: mongoose.Types.ObjectId,
+      type: String,
       required: true,
     },
     members: {

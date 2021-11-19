@@ -1,5 +1,5 @@
 const Channel = require("../models/Channel");
-
+const User = require("../models/User");
 exports.createChannel = async (req, res) => {
   try {
     if (req.body.name.length < 3) {
@@ -21,7 +21,7 @@ exports.createChannel = async (req, res) => {
       ...req.body,
     });
     const channel = new Channel({
-      createdBy: req.user.id,
+      createdBy: req.user.username,
       ...req.body,
     });
 
@@ -35,6 +35,27 @@ exports.createChannel = async (req, res) => {
     return res.status(500).json({
       error: true,
       message: "Error in Creating Channels " + ex,
+    });
+  }
+};
+
+exports.getChannelDetails = async (req, res) => {
+  try {
+    const channel = await Channel.findById(req.params.channelId);
+    if (channel) {
+      return res.status(200).json({
+        error: false,
+        channel,
+      });
+    }
+    return res.status(404).json({
+      error: true,
+      channel: null,
+    });
+  } catch (ex) {
+    return res.status(500).json({
+      error: true,
+      message: "Error in getting Channel " + ex,
     });
   }
 };
