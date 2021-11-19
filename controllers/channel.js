@@ -59,3 +59,15 @@ exports.getChannelDetails = async (req, res) => {
     });
   }
 };
+
+exports.joinChannel = async (req, res) => {
+  const channel = await Channel.findById(req.params.channelId);
+  if (channel) {
+    channel.members = [...channel.members, req.user.username];
+    await channel.save();
+    return res.status(200).json({
+      error: false,
+      channel,
+    });
+  }
+};
